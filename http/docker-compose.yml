@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+    server:
+        build: server/
+        command: sh -c "./server 12347"
+        network_mode: host
+        image: mgt-http-server
+    client:
+        build: client/
+        command: sh -c "./client localhost:12347 tests/*"
+        network_mode: host
+        image: mgt-http-client
+        depends_on:
+            - server
